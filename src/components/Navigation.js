@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import Logo from './linebigwhite@4x.png';
+import Logo from './images/linebigwhite@4x.png';
 
 function Navigation(props) {
   return (
@@ -11,7 +11,7 @@ function Navigation(props) {
           <img
               className="img-fluid rounded mb-4 mb-lg-0"
               src={Logo} width="200 px" height="200 px"
-              //alt=""
+              alt="Logo"
             /> 
           </Link>
 
@@ -63,12 +63,7 @@ function Navigation(props) {
                   Contact
                 </Link>
               </li>
-
-
-             
-
-              
-              
+  
             </ul>
           </div>
         </div>
