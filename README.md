@@ -1,5 +1,5 @@
 # React Stepper 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It has created a stepper that contains three forms. Each step is built in its own class, then data is passed from the current class to the next.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It created a stepper that contains three forms. Each step is built in its own class, then data is passed from the current class to the next.
 
 ## Required packages
 ```
