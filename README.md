@@ -1,6 +1,15 @@
-# Getting Started with Create React App
+# React Stepper 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It created a stepper that contains three forms. Each step is built in its own class, then data is passed from the current class to the next. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Required packages
+```
+  npm install --save react-router-dom
+  npm install @material-ui/core
+  npm install @material-ui/icons
+  npm install @material-ui/lab
+  npm install react-stepper-horizontal --save
+  npm install react-select-country-list --save
+```
 
 ## Available Scripts
 
