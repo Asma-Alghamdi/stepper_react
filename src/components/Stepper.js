@@ -1,114 +1,129 @@
 import React, { Component } from "react";
-import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Stepper from "react-stepper-horizontal";
-import Button from '@material-ui/core/Button'; 
-import PersonalInfo from './PersonalInfo';
-import VideoName from './VideoName';
-import VideoInfo from './VideoInfo';
-
+import PersonalInfo from "./PersonalInfo";
+import VideoName from "./VideoName";
+import VideoInfo from "./VideoInfo";
 
 export default class StepperDemo extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       currentStep: 0,
-      fname: '',
+      fname: "",
       personalInfo: [],
       videoname: [],
       videoInfo: [],
-      
     };
-    this.onClickNext = this.onClickNext.bind(this);
-    this.updateCurrent = this.updateCurrent.bind(this);
+    this.incCurrent = this.incCurrent.bind(this);
+    this.decCurrent = this.decCurrent.bind(this);
     this.getStepContent = this.getStepContent.bind(this);
   }
 
-updateCurrent (){
-this.setState({
-  currentStep: this.state.currentStep +1,
-})
-}
-
-
-getStepContent(activeStep){
-  switch (activeStep) {  
-    case 0:  
-      return <PersonalInfo parentCallback = {this.callbackFunction}></PersonalInfo>;  
-    case 1:  
-      return <VideoName parentCallback = {this.callbackFunction}></VideoName>;  
-    case 2:  
-      return <VideoInfo parentCallback = {this.callbackFunction}></VideoInfo>;   
-    default:  
-      return 'Unknown step';  
-  }  
-}
-
-
-  onClickNext() {
-  this.updateCurrent();
-  let t = this.state.currentStep;
-  if (t > 2){
-    console.log("done");
-  }else{ 
-    console.log(this.state.videoInfo);
-  }
-  
+  //Increase the current step by 1.
+  incCurrent() {
+    this.setState({
+      currentStep: this.state.currentStep + 1,
+    });
   }
 
+  //Decrease the current step by 1.
+  decCurrent() {
+    this.setState({
+      currentStep: this.state.currentStep - 1,
+    });
+  }
+
+  getStepContent(activeStep) {
+    switch (activeStep) {
+      case 0:
+        return (
+          //Pass data from the child component (PersonalInfo) to the parent component (Stepper).
+          <PersonalInfo parentCallback={this.callbackFunction}></PersonalInfo>
+        );
+      case 1:
+        //Pass data from the child component (VideoName) to the parent component (Stepper).
+        return <VideoName parentCallback={this.callbackFunction}></VideoName>;
+      case 2:
+        //Pass data from the parent component (Stepper) to the child component (VideoInfo).
+        //Here still need to backword....
+        return (
+          <VideoInfo>
+            dataParentToChild ={[this.state.videoname, this.state.personalInfo]}
+          </VideoInfo>
+        );
+      default:
+        return <p></p>;
+    }
+  }
+
+  //Store the passed data from children components into its state. Also, update the current state.
   callbackFunction = (childData) => {
-    let t = this.state.currentStep;
-    switch (t) {  
-      case 0:  
-        return this.setState({personalInfo: childData});
-      case 1:  
-        return this.setState({videoname: childData});  
-      case 2:  
-        return this.setState({videoInfo: childData});  
-      default:  
-        return 'Unknown step';  
-    }  
-    
-    
-}
+    let currentStep = this.state.currentStep;
+
+    switch (currentStep) {
+      case 0:
+        if (childData[childData.length - 1] === 1) {
+          this.incCurrent();
+        } else {
+          this.decCurrent();
+        }
+        return this.setState({ personalInfo: childData });
+      case 1:
+        if (childData[childData.length - 1] === 1) {
+          this.incCurrent();
+        } else {
+          this.decCurrent();
+        }
+        return this.setState({ videoname: childData });
+      case 2:
+        if (childData[childData.length - 1] === 1) {
+          this.incCurrent();
+        } else {
+          this.decCurrent();
+        }
+
+        return this.setState({ videoInfo: childData });
+      default:
+        return "Unknown step";
+    }
+  };
 
   render() {
+    //The "activeStep" variable stores the value of the current step.
     let activeStep = this.state.currentStep;
-    const buttonStyle = { background: '#E0E0E0', width: 200, padding: 16, textAlign: 'center', margin: '0 auto', marginTop: 32 };
+
+    //Show the Stepper
     return (
-     
-      <div>
-        <div><p>Asma</p></div>
+      <div
+        style={{
+          backgroundColor: "rgba(255, 255, 255, 0.75)",
+          border: "1px solid black",
+          borderRadius: "20px",
+        }}
+      >
         <Stepper
+          activeStep={activeStep} /*Active step index, starts at 0 */
           steps={[
             { title: "User Information" },
             { title: "Video Uploading" },
             { title: "Video Information" },
-          ]}
-          activeStep={this.state.currentStep}
-          activeColor= "#FFD966"
-          completeColor = "#9A4D4A"
-          defaultColor = "#0097A7"
-          activeBorderColor ="#FFD966"
-          titleTop ={20}
-          lineMarginOffset = {20}
-          defaultBorderWidth = {10}
+          ]} /*List of steps titles*/
+          activeColor="#FFD966" /*Active circle color*/
+          completeColor="#0097A7" /*Completed circle color*/
+          defaultColor="#0097A7" /*Default circle color - not active or completed*/
+          size={40} /*Circle size*/
+          circleFontSize={20} /*Circle text size*/
+          titleFontSize={18} /*	Title text size */
+          circleTop={20} /* Top margin of Stepper component */
+          titleTop={18} /* Space between circle and title */
+          activeBorderColor="#FFD966" /* Color of border surrounding active circle */
+          lineMarginOffset={20} /* Offset for line margin */
+          defaultBorderWidth={10} /* Default Border Width */
         />
-             
-              <Typography >{this.getStepContent(activeStep)}</Typography>  
-              
 
-        <Button  style= {buttonStyle}
-                  variant="contained"  
-                  color="primary"  
-                  onClick={this.onClickNext}  
-                  
-                >  
-             {activeStep === 2 ? 'Estimate' : 'Next'}  
-                </Button>  
+        <Typography>{this.getStepContent(activeStep)}</Typography>
       </div>
-     
     );
   }
 }

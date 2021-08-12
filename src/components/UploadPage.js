@@ -11,7 +11,7 @@ export default class UploadPage extends Component {
 
   render() {
     return (
-      <div style={{ padding: 40, margin: 40 }}>
+      <div style={{ padding: 40, paddingTop: -30, margin: 40, marginTop: -40  }}>
         <Grid
           container
           direction="row"
@@ -20,7 +20,7 @@ export default class UploadPage extends Component {
           spacing={1}
         >
           <div style={{ padding: 40, margin: 40 }}>
-            <div style={{ paddingBottom: 20, color: "#595959" }}>
+            <div style={{ paddingBottom: 20, color: "#FFFFFF" }}>
               <Grid item xs={12} align="center">
                 <Typography
                   className="font-weight-bold"
@@ -66,31 +66,31 @@ export default class UploadPage extends Component {
             <Grid container item xs={12} spacing={3}>
               <React.Fragment>
                 <Grid item xs={3} align="center">
-                  <h4 style={{ color: "#595959" }}>DURATION</h4>
+                  <h4 style={{ color: "#FFFFFF" }}>DURATION</h4>
                 </Grid>
                 <Grid item xs={3} align="center">
-                  <h4 style={{ color: "#595959" }}>QUALITY</h4>
+                  <h4 style={{ color: "#FFFFFF" }}>QUALITY</h4>
                 </Grid>
                 <Grid item xs={3} align="center">
-                  <h4 style={{ color: "#595959" }}>INFORMATION</h4>
+                  <h4 style={{ color: "#FFFFFF" }}>INFORMATION</h4>
                 </Grid>
                 <Grid item xs={3} align="center">
-                  <h4 style={{ color: "#595959" }}>CROWD TYPE</h4>
+                  <h4 style={{ color: "#FFFFFF" }}>CROWD TYPE</h4>
                 </Grid>
               </React.Fragment>
             </Grid>
             <Grid container item xs={12} spacing={3}>
               <React.Fragment>
-                <Grid item xs={3} align="center">
+                <Grid item xs={3} align="center" style={{ color: "#FFFFFF" }}>
                   The video should be 15 min or more
                 </Grid>
-                <Grid item xs={3} align="center">
+                <Grid item xs={3} align="center" style={{ color: "#FFFFFF" }}>
                   360p, 480p, 720p quality
                 </Grid>
-                <Grid item xs={3} align="center">
+                <Grid item xs={3} align="center" style={{ color: "#FFFFFF" }}>
                   Provide the required information
                 </Grid>
-                <Grid item xs={3} align="center">
+                <Grid item xs={3} align="center" style={{ color: "#FFFFFF" }}>
                   Spares crowd type is accepted
                 </Grid>
               </React.Fragment>
